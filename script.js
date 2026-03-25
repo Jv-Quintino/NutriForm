@@ -19,42 +19,42 @@ const estrutura = {
     "4.Os utensílios são mantidos limpos, organizados e acondicionados corretamente?",
     "5.Produtos químicos e as ferramentas de limpeza estão disponíveis? São todos aprovados?"
   ],
-    "Continuação Higienização": [
-        "Checklist de limpeza preenchido?",
-        "Ralos limpos?",
-        "Ambiente livre de focos insalubres?",
-        "Lixeiras adequadas?",
-        "Sem presença de pragas?"
+    "Higienização e Organização (Continuação)": [
+        "Checklist de limpeza está preenchido corretamente?",
+        "Todos os ralos estão limpos, com livre escoamento e sem água parada/estagnada?",
+        "As áreas são mantidas livres de focos insalubres e de materiais em desuso e/ou estranhos ao ambiente?",
+        "As lixeiras apresentam acionamento não manual; são suficientes; estão forradas com plásticos e permanecem fechadas?",
+        "As áreas de alimentos estão livres de evidência ou atividade de pragas?"
     ],
     "Separação dos contaminantes": [
-        "Alimentos separados corretamente?",
-        "Produtos químicos separados?",
-        "Proteção contra contaminação?"
+        "Os alimentos crus são mantidos separados dos alimentos prontos para consumo e também por espécies?",
+        "Os produtos químicos são mantidos separados dos alimentos e das superfícies de contato com alimentos?",
+        "Os alimentos e as superfícies de contato com alimentos estão protegidos contra contaminação física(ferrugem, vidro, peças de equipamentos soltas, cabelo, palah de aço, palitos, materiais de madeira, poeiras, esponjas desgastadas, paninhos...)?"
     ],
-    "Temperatura": [
-        "Possui termômetro?",
-        "Alimentos cozidos corretamente?",
-        "Alimentos quentes acima de 60°?",
-        "Refrigeração correta?",
-        "Limite de carga respeitado?",
-        "Descongelamento correto?"
+    "Manutenção de Temperatura": [
+        "O estabelecimento tem termômetro calibrado para aferir temperatura?",
+        "Os alimentos são cozidos na temperatura interna ideal (74°C)?",
+        "Os alimentos quentes são mantidos à 60°C ou acima?",
+        "Os itens refrigerados (5°C) e congelados (-18°C) estão nas temperaturas corretas?",
+        "A linha de carga máxima dos equipamentos de cadeia de frio são respeitadas?",
+        "Os procedimentos para o descongelamento de alimentos são executados corretamente(em refrigeração e início identificado)?"
     ],
-    "Continuação Temperatura": [
-        "Resfriamento correto?",
-        "Registros preenchidos?"
+    "Manutenção de Temperatura(Continuação)": [
+        "Os procedimentos para o resfriamento de comidas são executados corretamente(em refrigeração)?",
+        "Os registros de temperatura estão preenchidos corretamente?"
     ],
-    "Validades": [
-        "Produtos vencidos?",
-        "Produtos sinalizados?",
-        "Produtos impróprios separados?",
-        "PVPS aplicado?",
-        "Rotulagem correta?"
+    "Sinalizações / Validades": [
+        "Durante a vistoria, foi encontrado algum produto vencido?",
+        "Todos os insumos estão sinalizados com validade original e com validade após abertura?",
+        "Os produtos impróprios para consumo, estão em local específico, separado dos demais, protegidos e devidamente sinalizados.",
+        "Na amostragem, a prática do PVPS é aplicada?",
+        "Todos os alimentos expostos em embalagens fechadas, são rotulados conforme legislação, incluindo lista de ingredientes e alergênicos?"
     ],
-    "Planilhas": [
-        "Planilhas preenchidas corretamente?"
+    "Planilhas de controles": [
+        "Todas as planilhas de controles estão sendo preenchidas e de fato realizadas corretamente?"
     ],
     "Comprometimento": [
-        "Equipe treinada?"
+        "Colaborador tem conhecimento acerca de boas práticas de manipulação realizadas em loja. Tem conhecimento das oportunidades ocorridas na última auditoria?"
     ]
 };
 
@@ -108,28 +108,64 @@ let percentualFinal = 0;
 let statusFinal = "";
 
 function calcular() {
-    let total = 0;
-    let nc = 0;
+  let total = 0;
+  let nc = 0;
+  let c = 0;
 
-    for (let i = 0; i < perguntasLista.length; i++) {
-        if (respostas[i] && respostas[i] !== "NA") {
-            total++;
-            if (respostas[i] === "NC") nc++;
-        }
+  for (let i = 0; i < perguntasLista.length; i++) {
+    if (respostas[i] && respostas[i] !== "NA") {
+      total++;
+
+      if (respostas[i] === "NC") nc++;
+      if (respostas[i] === "C") c++;
     }
+  }
 
-    percentualFinal = (nc / total) * 100 || 0;
+  percentualFinal = (nc / total) * 100 || 0;
 
-    if (percentualFinal > 20) statusFinal = "VERMELHO";
-    else if (percentualFinal >= 10) statusFinal = "REGULAR";
-    else statusFinal = "BOM";
+  let status = "";
+  let cor = "";
 
-    let cor = statusFinal === "VERMELHO" ? "vermelho" :
-        statusFinal === "REGULAR" ? "amarelo" : "verde";
+  if (percentualFinal > 20) {
+    status = "VERMELHO";
+    cor = "vermelho";
+  } else if (percentualFinal >= 10) {
+    status = "REGULAR";
+    cor = "amarelo";
+  } else {
+    status = "BOM";
+    cor = "verde";
+  }
 
-    document.getElementById("resultado").innerHTML = `
-    <strong>${statusFinal}</strong><br>
-    ${percentualFinal.toFixed(2)}% de não conformidade
+  statusFinal = status;
+
+  document.getElementById("resultado").innerHTML = `
+    <h3>RESULTADO</h3>
+
+    <div class="resultado-item">
+      <span>Questões avaliadas:</span>
+      <strong>${total}</strong>
+    </div>
+
+    <div class="resultado-item">
+      <span>Questões não conformes:</span>
+      <strong>${nc}</strong>
+    </div>
+
+    <div class="resultado-item">
+      <span>Questões conformes:</span>
+      <strong>${c}</strong>
+    </div>
+
+    <div class="resultado-item">
+      <span>Percentual:</span>
+      <strong>${percentualFinal.toFixed(2)}%</strong>
+    </div>
+
+    <div class="resultado-item">
+      <span>Status:</span>
+      <strong>${status}</strong>
+    </div>
 
     <div class="barra-container">
       <div class="barra ${cor}" style="width:${percentualFinal}%"></div>
