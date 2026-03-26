@@ -152,6 +152,27 @@ textarea {
   transition: 0.5s;
 }
 
+.topo {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.logo {
+  width: 150px;
+  margin-bottom: 10px;
+}
+
+.info-extra {
+  margin: 10px 0;
+}
+
+.info-extra input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
 .verde { background: #22c55e; }
 .amarelo { background: #f59e0b; }
 .vermelho { background: #ef4444; }
