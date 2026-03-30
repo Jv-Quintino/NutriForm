@@ -243,7 +243,31 @@ try {
 
   y += 8;
   doc.setFontSize(12);
-  doc.text(`RESULTADO FINAL: ${statusFinal}`, 10, y);
+  // ===== TARJA DE RESULTADO =====
+y += 5;
+
+// define cor baseada no status
+let corStatus = [34, 197, 94]; // verde padrão
+
+if (statusFinal === "REGULAR") {
+  corStatus = [245, 158, 11]; // amarelo
+} else if (statusFinal === "VERMELHO") {
+  corStatus = [239, 68, 68]; // vermelho
+}
+
+// fundo da tarja
+doc.setFillColor(...corStatus);
+doc.rect(10, y, 190, 12, "F");
+
+// texto dentro da tarja
+doc.setTextColor(255, 255, 255);
+doc.setFontSize(12);
+doc.text(`RESULTADO FINAL: ${statusFinal}`, 105, y + 8, { align: "center" });
+
+// reset cor
+doc.setTextColor(0, 0, 0);
+
+y += 18;
 
   y += 15;
   doc.setFontSize(11);
@@ -256,6 +280,11 @@ try {
     doc.rect(10, yPos, 40, 6, "F");
     doc.text(texto, 55, yPos + 5);
   }
+  
+  if (y > 230) {
+  doc.addPage();
+  y = 20;
+}
 
   barra(y, [34, 197, 94], "BOM (0% a 9%)");
   y += 10;
@@ -271,7 +300,7 @@ if (y > 230) {
 }
 
 // ESPAÇO CONTROLADO
-y += 15;
+y += 25;
 
 // DATA
 doc.setFontSize(11);
@@ -292,3 +321,4 @@ doc.text("Consultora Quality", 115, y);
 
   doc.save("checklist-final.pdf");
 }
+
