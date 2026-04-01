@@ -209,9 +209,12 @@ try {
   y += 8;
 
   const empresa = document.getElementById("empresa")?.value || "Não informado";
+  
 
   doc.setFontSize(10);
-  doc.text("Setor: Cozinha", 10, y);
+  const setor = document.getElementById("setor")?.value || "Não informado";
+
+  doc.text(`Setor: ${setor}`, 10, y);
 
   y += 6;
   doc.text(`Empresa: ${empresa}`, 10, y);
