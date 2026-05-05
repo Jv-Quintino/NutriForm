@@ -381,3 +381,14 @@ doc.text("Consultora Quality", 115, y);
 
   doc.save("checklist-final.pdf");
 }
+
+function verificarLogin() {
+  const senha = document.getElementById("senha").value;
+
+  if (senha === "nutriform050526") { //
+    document.getElementById("login").style.display = "none";
+    document.getElementById("sistema").style.display = "block";
+  } else {
+    alert("Senha incorreta!");
+  }
+}
