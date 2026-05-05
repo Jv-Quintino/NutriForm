@@ -189,7 +189,11 @@ textarea {
 }
 
 .login-box h2 {
+  text-align: center;
   color: white;
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: 600;
 }
 
 .login-box input {
@@ -208,6 +212,86 @@ textarea {
   cursor: pointer;
 }
 
+@media (max-width: 768px) {
+
+  .container {
+    padding: 15px;
+  }
+
+  /* TOPO */
+  .topo {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .logo {
+    width: 80px;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+
+  /* HEADER */
+  .header {
+    flex-direction: column;
+    gap: 5px;
+    font-size: 14px;
+  }
+
+  /* INPUTS */
+  .info-extra {
+    flex-direction: column;
+  }
+
+  .info-extra input {
+    width: 100%;
+  }
+
+  /* PERGUNTAS */
+  .pergunta {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pergunta div:first-child {
+    font-size: 14px;
+  }
+
+  /* BOTÕES C / NC / NA */
+  .botoes {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .botoes button {
+    flex: 1;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  /* TEXTAREA */
+  textarea {
+    width: 100%;
+  }
+
+  /* BOTÕES DE AÇÃO */
+  .acoes {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .acoes button {
+    width: 100%;
+  }
+
+  /* RESULTADO */
+  .resultado-box {
+    font-size: 14px;
+  }
+
+}
 .verde { background: #22c55e; }
 .amarelo { background: #f59e0b; }
 .vermelho { background: #ef4444; }
